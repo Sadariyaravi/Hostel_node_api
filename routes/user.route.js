@@ -17,13 +17,20 @@ UserRoute.post(
   UserController.getUserByContactNo,
   generateToken,
   async (req, res) => {
-    res.cookie("acess_token", res.locals.token, {
+    res.cookie("acess_token", res.locals.userdata.token, {
       httpOnly: false,
-      expires: new Date(Date.now() + (120 * 60 * 1000)),
+      expires: new Date(Date.now() + 120 * 60 * 1000),
+      secure: true,
+    });
+    res.cookie("userName", res.locals.userdata.username, {
+      httpOnly: false,
+      expires: new Date(Date.now() + 120 * 60 * 1000),
       secure: true,
     });
     res.status(200);
-    res.json({ message: "Logged in successfully" });
+    res.json({
+      message: "Logged in successfully",
+    });
   }
 );
 

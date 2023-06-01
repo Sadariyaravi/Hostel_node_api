@@ -1,7 +1,9 @@
 // import packages
 require("dotenv").config();
 const express = require("express");
+const serverless = require("serverless-http");
 const app = express();
+const router = express.Router();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const sequalize = require("./config/db.connection");
@@ -28,7 +30,7 @@ app.use(
 );
 
 //Declare Routes for api
-app.use("/.netlify/functions/api", UserRoute, RoleRoute, PostRouter);
+app.use(UserRoute, RoleRoute, PostRouter);
 
 // Route Not Found Errors(for invalid routes)
 app.use("*", (req, res) => {
@@ -49,7 +51,7 @@ app.use((error, req, res, next) => {
 });
 
 // synchronize all sequalize model with database *DB connection
-sequalize.sync({ alter: true }, (error, result) => {
+sequalize.sync({ alter: false }, (error, result) => {
   if (error) return error;
   else return result;
 });
