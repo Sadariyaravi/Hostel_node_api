@@ -9,13 +9,14 @@ const cors = require("cors");
 const sequalize = require("./config/db.connection");
 require("./models/index");
 const cookieParser = require("cookie-parser");
-require("./config/prod")(app);
 // Import All Route for use
 const RoleRoute = require("./routes/role.route");
 const UserRoute = require("./routes/user.route");
 const PostRouter = require("./routes/post.route");
 const morgan = require("morgan");
 const { any } = require("joi");
+const collegeRouter = require("./routes/college");
+const courseRoute = require("./routes/course");
 
 // use bodyparser for access body data in http request
 // middleware
@@ -30,7 +31,7 @@ app.use(
 );
 
 //Declare Routes for api
-app.use(UserRoute, RoleRoute, PostRouter);
+app.use(UserRoute, RoleRoute, PostRouter, collegeRouter, courseRoute);
 
 // Route Not Found Errors(for invalid routes)
 app.use("*", (req, res) => {

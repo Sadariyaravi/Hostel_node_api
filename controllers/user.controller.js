@@ -65,10 +65,10 @@ const AddUser = async (req, res, next) => {
     } else if (ExistUser) {
       next({
         status: SERVER_ERROR,
-        detail: "This user is already registered please login",
+        message: "This user is already registered please login",
       });
     } else {
-      console.log(req.body)
+      console.log(req.body);
       Users.create({
         UserName: req.body.UserName,
         UserPhoneNumber: req.body.UserPhoneNumber,

@@ -15,7 +15,7 @@ const AdmissionDetail = sequalize.define("AdmissionDetail", {
     allownull: false,
   },
   CourseId: {
-    type: DataTypes.TEXT,
+    type: DataTypes.INTEGER,
     allownull: false,
   },
   PhoneNumber: {
@@ -44,4 +44,4 @@ const AdmissionDetail = sequalize.define("AdmissionDetail", {
   },
 });
 
-module.exports = Posts;
+module.exports = AdmissionDetail;
